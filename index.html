@@ -17,16 +17,16 @@
             <button onclick="giveRemedy('Ervas aromáticas')">Ervas aromáticas</button>
             <button onclick="giveRemedy('Alho')">Alho</button>
             <button onclick="giveRemedy('Hortelã')">Hortelã</button>
-            <button onclick="giveRemedy('Mel')">Mel</button>
-            <button onclick="giveRemedy('Vinagre')">Vinagre</button>
+            <button onclick="giveRemedy('Chá de Ervas')">Chá de Ervas</button>
             <button onclick="giveRemedy('Água purificada')">Água purificada</button>
         </div>
         <p id="result">Resultado: </p>
         <br>
         <p id="score">Acertos: 0 | Erros: 0</p>
         <p id="rounds-left">Pessoas restantes nesta rodada: 5</p>
-        <button onclick="startGame()" id="new-round" style="display: none;">Nova Rodada</button>
-        <br>
+        <div id="new-round-container">
+            <button onclick="startGame()" id="new-round">Novo Round</button>
+        </div>
         <p>Feito por: Henry Yuji-Rm12932 & Lucas de Palma-Rm15161</p>
     </div>
     <script src="script.js"></script>

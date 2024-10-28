@@ -1,8 +1,8 @@
 const symptomsRemedies = [
     { symptom: "Inchaço", remedy: "Ervas aromáticas", image: "imagens/person_buboes.png" },
     { symptom: "Febre", remedy: "Alho", image: "imagens/person_fever.png" },
-    { symptom: "Calafrios", remedy: "Vinagre", image: "imagens/person_chills.png" },
-    { symptom: "Dor de cabeça", remedy: "Mel", image: "imagens/person_headache.png" },
+    { symptom: "Calafrios", remedy: "Chá de Ervas", image: "imagens/person_chills.png" },
+    { symptom: "Dor de cabeça", remedy: "Hortelã", image: "imagens/person_headache.png" },
     { symptom: "Vômitos", remedy: "Água purificada", image: "imagens/person_vomiting.png" }
 ];
 
