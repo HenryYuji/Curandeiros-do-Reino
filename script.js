@@ -1,91 +1,71 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const symptomsRemedies = [
+    { symptom: "Inchaço", remedy: "Ervas aromáticas", image: "imagens/person_buboes.png" },
+    { symptom: "Febre", remedy: "Alho", image: "imagens/person_fever.png" },
+    { symptom: "Calafrios", remedy: "Vinagre", image: "imagens/person_chills.png" },
+    { symptom: "Dor de cabeça", remedy: "Mel", image: "imagens/person_headache.png" },
+    { symptom: "Vômitos", remedy: "Água purificada", image: "imagens/person_vomiting.png" }
+];
 
-let player = { x: 50, y: 50, width: 30, height: 30, health: 100 };
-let keys = {};
-let items = [];
-let enemies = [];
+let correct = 0;
+let wrong = 0;
+let currentSymptom = {};
+let lastSymptom = {};
+let rounds = 5;
 
-function createItem() {
-    const item = {
-        x: Math.random() * (canvas.width - 20),
-        y: Math.random() * (canvas.height - 20),
-        width: 20,
-        height: 20
-    };
-    items.push(item);
-}
-
-function createEnemy() {
-    const enemy = {
-        x: Math.random() * (canvas.width - 30),
-        y: Math.random() * (canvas.height - 30),
-        width: 30,
-        height: 30,
-        direction: Math.random() < 0.5 ? 1 : -1
-    };
-    enemies.push(enemy);
-}
-
-function update() {
-    if (keys['ArrowUp']) player.y -= 2;
-    if (keys['ArrowDown']) player.y += 2;
-    if (keys['ArrowLeft']) player.x -= 2;
-    if (keys['ArrowRight']) player.x += 2;
-
-    items.forEach((item, index) => {
-        if (player.x < item.x + item.width &&
-            player.x + player.width > item.x &&
-            player.y < item.y + item.height &&
-            player.y + player.height > item.y) {
-            items.splice(index, 1);
-            player.health += 10;
-            console.log("Saúde: " + player.health);
-        }
-    });
-
-    enemies.forEach((enemy) => {
-        enemy.x += enemy.direction * 1.5;
-
-        if (enemy.x < 0 || enemy.x > canvas.width - enemy.width) {
-            enemy.direction *= -1;
-        }
-
-        if (player.x < enemy.x + enemy.width &&
-            player.x + player.width > enemy.x &&
-            player.y < enemy.y + enemy.height &&
-            player.y + player.height > enemy.y) {
-            player.health -= 1;
-            console.log("Saúde: " + player.health);
-        }
-    });
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'green';
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-
-    ctx.fillStyle = 'yellow';
-    items.forEach(item => ctx.fillRect(item.x, item.y, item.width, item.height));
-
-    ctx.fillStyle = 'red';
-    enemies.forEach(enemy => ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height));
-
-    if (player.health > 0) {
-        requestAnimationFrame(update);
+function startGame() {
+    if (rounds <= 0) {
+        document.getElementById("result").textContent = `Rodada encerrada! Você acertou ${correct} e errou ${wrong}.`;
+        document.getElementById("new-round").style.display = "block";
+        document.getElementById("remedies-container").style.display = "none";
+        document.getElementById("rounds-left").style.display = "none";
     } else {
-        alert("Game Over! Sua saúde acabou.");
+        do {
+            currentSymptom = symptomsRemedies[Math.floor(Math.random() * symptomsRemedies.length)];
+        } while (currentSymptom.symptom === lastSymptom.symptom);
+        
+        lastSymptom = currentSymptom;
+        
+        document.getElementById("person-symptom").textContent = `Sintoma: ${currentSymptom.symptom}`;
+        document.getElementById("person-image").src = currentSymptom.image;
+        document.getElementById("result").textContent = "Escolha um remédio para o sintoma.";
+        document.getElementById("rounds-left").textContent = `Pessoas restantes nesta rodada: ${rounds}`;
     }
 }
 
-document.addEventListener('keydown', (e) => {
-    keys[e.key] = true;
+function giveRemedy(remedy) {
+    if (remedy === currentSymptom.remedy) {
+        correct++;
+        document.getElementById("result").textContent = "Correto! Você acertou o remédio.";
+    } else {
+        wrong++;
+        document.getElementById("result").textContent = `Errado! O remédio correto era ${currentSymptom.remedy}.`;
+    }
+    rounds--;
+
+    document.getElementById("score").textContent = `Acertos: ${correct} | Erros: ${wrong}`;
+    document.getElementById("rounds-left").textContent = `Pessoas restantes nesta rodada: ${rounds}`;
+
+    setTimeout(() => {
+        if (rounds > 0) {
+            startGame();
+        } else {
+            document.getElementById("result").textContent = `Rodada encerrada! Você acertou ${correct} e errou ${wrong}.`;
+            document.getElementById("new-round").style.display = "block";
+            document.getElementById("remedies-container").style.display = "none";
+            document.getElementById("rounds-left").style.display = "none";
+        }
+    }, 1000);
+}
+
+document.getElementById("new-round").addEventListener("click", () => {
+    correct = 0;
+    wrong = 0;
+    rounds = 5;
+    document.getElementById("score").textContent = `Acertos: 0 | Erros: 0`;
+    document.getElementById("new-round").style.display = "none";
+    document.getElementById("remedies-container").style.display = "block";
+    document.getElementById("rounds-left").style.display = "block";
+    startGame();
 });
 
-document.addEventListener('keyup', (e) => {
-    keys[e.key] = false;
-});
-
-for (let i = 0; i < 5; i++) createItem();
-for (let i = 0; i < 3; i++) createEnemy();
-
-update();
+startGame();
