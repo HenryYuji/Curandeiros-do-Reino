@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>O Mestre da Peste</title>
-<link rel="stylesheet" href="styles.css">
-</head>
+<link rel="stylesheet" href="style.css">
 <body>
-<div class="game-container">
+<div id="start-screen" class="screen">
 <h1>O Mestre da Peste</h1>
-<div id="game">
-<p id="patient-description">Um novo paciente chegou com sintomas suspeitos...</p>
-<div class="buttons">
-<button onclick="treatPatient()">Tratar Paciente</button>
-<button onclick="quarantinePatient()">Colocar em Quarentena</button>
+<p>Você acorda em um hospital medieval. O lugar está em caos devido à peste negra. Sua missão é encontrar e curar 10 pacientes usando os remédios corretos.</p>
+<button id="start-button">Iniciar Jogo</button>
 </div>
-<p id="result"></p>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<div id="dialog"></div>
+<div id="end-screen" class="screen">
+<h2>Parabéns, você curou todos os pacientes!</h2>
+<p>Você salvou vidas e venceu a peste negra. Obrigado por jogar!</p>
+<button id="restart-button">Jogar Novamente</button>
 </div>
-</div>
-<script src="game.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
