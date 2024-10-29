@@ -1,71 +1,97 @@
-const symptomsRemedies = [
-    { symptom: "Inchaço", remedy: "Ervas aromáticas", image: "imagens/person_buboes.png" },
-    { symptom: "Febre", remedy: "Alho", image: "imagens/person_fever.png" },
-    { symptom: "Calafrios", remedy: "Chá de Ervas", image: "imagens/person_chills.png" },
-    { symptom: "Dor de cabeça", remedy: "Hortelã", image: "imagens/person_headache.png" },
-    { symptom: "Vômitos", remedy: "Água purificada", image: "imagens/person_vomiting.png" }
+const doencas = [
+    { nome: "Mal dos Ardentes", sintomas: "Formigamento, convulsões, queimação nas extremidades, gangrena." },
+    { nome: "Varíola", sintomas: "Febre, erupção cutânea com bolhas, dor de cabeça, vômito." },
+    { nome: "Peste Negra", sintomas: "Febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas." },
+    { nome: "Lepra", sintomas: "Lesões cutâneas, fraqueza muscular, dormência nas extremidades." }
 ];
 
-let correct = 0;
-let wrong = 0;
-let currentSymptom = {};
-let lastSymptom = {};
-let rounds = 5;
+const textosMedicos = [
+    "Os dias de um médico na Idade Média eram longos e desafiadores. Diagnosticar corretamente era crucial para salvar vidas em um tempo de poucos recursos.",
+    "No ambiente sombrio da Idade Média, doenças devastadoras assolavam a população, e os médicos se esforçavam para aliviar o sofrimento.",
+    "Com pouca ciência e muitos mistérios, os médicos da Idade Média lutavam diariamente para entender as doenças que atormentavam as pessoas."
+];
 
-function startGame() {
-    if (rounds <= 0) {
-        document.getElementById("result").textContent = `Rodada encerrada! Você acertou ${correct} e errou ${wrong}.`;
-        document.getElementById("new-round").style.display = "block";
-        document.getElementById("remedies-container").style.display = "none";
-        document.getElementById("rounds-left").style.display = "none";
+let doencaAtual = {};
+let paginaAtual = 0;
+let acertos = 0;
+let erros = 0;
+let totalPacientes = 0;
+let pacienteAtual = 0;
+
+function iniciarJogo() {
+    acertos = 0;
+    erros = 0;
+    pacienteAtual = 0;
+    totalPacientes = Math.floor(Math.random() * (7 - 3 + 1)) + 3;
+    document.getElementById("telaFinal").style.display = "none";
+    document.getElementById("gameContainer").style.display = "flex";
+    iniciarRodada();
+}
+
+function iniciarRodada() {
+    if (pacienteAtual < totalPacientes) {
+        doencaAtual = doencas[Math.floor(Math.random() * doencas.length)];
+        document.getElementById("sintomas").textContent = doencaAtual.sintomas;
     } else {
-        do {
-            currentSymptom = symptomsRemedies[Math.floor(Math.random() * symptomsRemedies.length)];
-        } while (currentSymptom.symptom === lastSymptom.symptom);
-        
-        lastSymptom = currentSymptom;
-        
-        document.getElementById("person-symptom").textContent = `Sintoma: ${currentSymptom.symptom}`;
-        document.getElementById("person-image").src = currentSymptom.image;
-        document.getElementById("result").textContent = "Escolha um remédio para o sintoma.";
-        document.getElementById("rounds-left").textContent = `Pessoas restantes nesta rodada: ${rounds}`;
+        finalizarRodada();
     }
 }
 
-function giveRemedy(remedy) {
-    if (remedy === currentSymptom.remedy) {
-        correct++;
-        document.getElementById("result").textContent = "Correto! Você acertou o remédio.";
-    } else {
-        wrong++;
-        document.getElementById("result").textContent = `Errado! O remédio correto era ${currentSymptom.remedy}.`;
-    }
-    rounds--;
-
-    document.getElementById("score").textContent = `Acertos: ${correct} | Erros: ${wrong}`;
-    document.getElementById("rounds-left").textContent = `Pessoas restantes nesta rodada: ${rounds}`;
-
-    setTimeout(() => {
-        if (rounds > 0) {
-            startGame();
-        } else {
-            document.getElementById("result").textContent = `Rodada encerrada! Você acertou ${correct} e errou ${wrong}.`;
-            document.getElementById("new-round").style.display = "block";
-            document.getElementById("remedies-container").style.display = "none";
-            document.getElementById("rounds-left").style.display = "none";
-        }
-    }, 1000);
+function atualizarPaginaLivro() {
+    const paginaDoenca = document.getElementById("paginaDoenca");
+    paginaDoenca.innerHTML = `
+        <h3>${doencas[paginaAtual].nome}</h3>
+        <p>${doencas[paginaAtual].sintomas}</p>
+    `;
 }
 
-document.getElementById("new-round").addEventListener("click", () => {
-    correct = 0;
-    wrong = 0;
-    rounds = 5;
-    document.getElementById("score").textContent = `Acertos: 0 | Erros: 0`;
-    document.getElementById("new-round").style.display = "none";
-    document.getElementById("remedies-container").style.display = "block";
-    document.getElementById("rounds-left").style.display = "block";
-    startGame();
+document.getElementById("livro").addEventListener("click", function() {
+    const modal = document.getElementById("modalLivro");
+    atualizarPaginaLivro();
+    modal.style.display = "block";
 });
 
-startGame();
+document.querySelector(".close").addEventListener("click", function() {
+    document.getElementById("modalLivro").style.display = "none";
+});
+
+document.getElementById("proximo").addEventListener("click", function() {
+    paginaAtual = (paginaAtual + 1) % doencas.length;
+    atualizarPaginaLivro();
+});
+
+document.getElementById("anterior").addEventListener("click", function() {
+    paginaAtual = (paginaAtual - 1 + doencas.length) % doencas.length;
+    atualizarPaginaLivro();
+});
+
+function verificarDiagnostico(escolha) {
+    if (doencas[escolha].nome === doencaAtual.nome) {
+        acertos++;
+    } else {
+        erros++;
+    }
+    pacienteAtual++;
+    iniciarRodada();
+}
+
+document.getElementById("doenca1").addEventListener("click", function() { verificarDiagnostico(0); });
+document.getElementById("doenca2").addEventListener("click", function() { verificarDiagnostico(1); });
+document.getElementById("doenca3").addEventListener("click", function() { verificarDiagnostico(2); });
+document.getElementById("doenca4").addEventListener("click", function() { verificarDiagnostico(3); });
+
+function finalizarRodada() {
+    const textoFinal = `
+        Você diagnosticou ${totalPacientes} pacientes. 
+        Acertos: ${acertos} 
+        Erros: ${erros}
+        ${textosMedicos[Math.floor(Math.random() * textosMedicos.length)]}
+    `;
+    document.getElementById("textoFinal").innerHTML = textoFinal;
+    document.getElementById("gameContainer").style.display = "none";
+    document.getElementById("telaFinal").style.display = "flex";
+}
+
+document.getElementById("novoJogo").addEventListener("click", iniciarJogo);
+
+window.onload = iniciarJogo;

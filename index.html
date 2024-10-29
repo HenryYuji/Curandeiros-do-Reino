@@ -3,32 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peste: O Desafio dos Remédios</title>
+    <title>Jogo Medieval - Diagnóstico</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Peste: O Desafio dos Remédios</h1>
-    <div id="game-container">
-        <div id="person-container">
-            <img id="person-image" src="person.png" alt="Pessoa com Sintoma">
-            <p id="person-symptom">Sintoma: </p>
+    <div class="game-container" id="gameContainer">
+        <div class="mesa">
+            <div class="livro" id="livro">
+                <h2>Clique para abrir o livro</h2>
+            </div>
+            <div class="opcoes-doenca">
+                <h3>Qual a doença?</h3>
+                <button id="doenca1">Mal dos Ardentes</button>
+                <button id="doenca2">Varíola</button>
+                <button id="doenca3">Peste Negra</button>
+                <button id="doenca4">Lepra</button>
+            </div>
         </div>
-        <div id="remedies-container">
-            <button onclick="giveRemedy('Ervas aromáticas')">Ervas aromáticas</button>
-            <button onclick="giveRemedy('Alho')">Alho</button>
-            <button onclick="giveRemedy('Hortelã')">Hortelã</button>
-            <button onclick="giveRemedy('Chá de Ervas')">Chá de Ervas</button>
-            <button onclick="giveRemedy('Água purificada')">Água purificada</button>
+        <div class="paciente">
+            <img id="imagem-paciente" src="paciente.jpg" alt="Paciente Medieval">
+            <h2>Sintomas apresentados</h2>
+            <p id="sintomas"></p>
         </div>
-        <p id="result">Resultado: </p>
-        <br>
-        <p id="score">Acertos: 0 | Erros: 0</p>
-        <p id="rounds-left">Pessoas restantes nesta rodada: 5</p>
-        <div id="new-round-container">
-            <button onclick="startGame()" id="new-round">Novo Round</button>
-        </div>
-        <p>Feito por: Henry Yuji-Rm12932 & Lucas de Palma-Rm15161</p>
     </div>
+
+    <div id="modalLivro" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Livro de Diagnóstico</h2>
+            <div id="paginaDoenca">
+                <h3>Doença</h3>
+                <p>Sintomas...</p>
+            </div>
+            <div class="navegacao">
+                <button id="anterior">Anterior</button>
+                <button id="proximo">Próximo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="telaFinal" class="tela-final">
+        <h2>Fim da Rodada</h2>
+        <p id="textoFinal"></p>
+        <button id="novoJogo">Iniciar Nova Rodada</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
