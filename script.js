@@ -1,8 +1,24 @@
 const doencas = [
-    { nome: "Mal dos Ardentes", sintomas: "Formigamento, convulsões, queimação nas extremidades, gangrena." },
-    { nome: "Varíola", sintomas: "Febre, erupção cutânea com bolhas, dor de cabeça, vômito." },
-    { nome: "Peste Negra", sintomas: "Febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas." },
-    { nome: "Lepra", sintomas: "Lesões cutâneas, fraqueza muscular, dormência nas extremidades." }
+    { 
+        nome: "Ergotismo", 
+        sintomas: "Convulsões, alucinações, dor de cabeça intensa, delírios, psicoses.", 
+        imagem: "ergotismo.jpg" 
+    },
+    { 
+        nome: "Varíola", 
+        sintomas: "Febre, erupção cutânea com bolhas, dor de cabeça, vômito.", 
+        imagem: "variola.jpg" 
+    },
+    { 
+        nome: "Peste Negra", 
+        sintomas: "Febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas.", 
+        imagem: "peste_negra.jpg" 
+    },
+    { 
+        nome: "Lepra", 
+        sintomas: "Lesões cutâneas, fraqueza muscular, dormência nas extremidades.", 
+        imagem: "lepra.jpg" 
+    }
 ];
 
 const textosMedicos = [
@@ -11,7 +27,16 @@ const textosMedicos = [
     "Com pouca ciência e muitos mistérios, os médicos da Idade Média lutavam diariamente para entender as doenças que atormentavam as pessoas."
 ];
 
+// Objeto para controlar quantas vezes cada doença apareceu
+const controleDoencas = {
+    "Ergotismo": 0,
+    "Varíola": 0,
+    "Peste Negra": 0,
+    "Lepra": 0
+};
+
 let doencaAtual = {};
+let doencaAnterior = null; // Para garantir que a doença anterior não se repita
 let paginaAtual = 0;
 let acertos = 0;
 let erros = 0;
@@ -25,13 +50,37 @@ function iniciarJogo() {
     totalPacientes = Math.floor(Math.random() * (7 - 3 + 1)) + 3;
     document.getElementById("telaFinal").style.display = "none";
     document.getElementById("gameContainer").style.display = "flex";
+
+    // Reseta o controle de frequência de doenças
+    Object.keys(controleDoencas).forEach(doenca => controleDoencas[doenca] = 0);
+
     iniciarRodada();
+}
+
+function selecionarDoenca() {
+    let doencaSelecionada;
+
+    // Continua tentando até encontrar uma doença válida
+    do {
+        doencaSelecionada = doencas[Math.floor(Math.random() * doencas.length)];
+    } while (
+        doencaSelecionada.nome === doencaAnterior ||  // Verifica se não é a mesma da rodada anterior
+        controleDoencas[doencaSelecionada.nome] >= 2  // Verifica se já apareceu 2 vezes
+    );
+
+    return doencaSelecionada;
 }
 
 function iniciarRodada() {
     if (pacienteAtual < totalPacientes) {
-        doencaAtual = doencas[Math.floor(Math.random() * doencas.length)];
+        doencaAtual = selecionarDoenca();
+        controleDoencas[doencaAtual.nome]++;  // Aumenta o contador para a doença atual
+        doencaAnterior = doencaAtual.nome;    // Armazena a doença atual para a próxima verificação
+
         document.getElementById("sintomas").textContent = doencaAtual.sintomas;
+        
+        // Exibe a imagem correspondente à doença atual
+        document.getElementById("imagem-paciente").src = doencaAtual.imagem;
     } else {
         finalizarRodada();
     }
