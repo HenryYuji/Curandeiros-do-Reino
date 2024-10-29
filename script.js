@@ -131,9 +131,9 @@ document.getElementById("doenca4").addEventListener("click", function() { verifi
 
 function finalizarRodada() {
     const textoFinal = `
-        Você diagnosticou ${totalPacientes} pacientes. 
+        Você diagnosticou ${totalPacientes} pacientes!
         Acertos: ${acertos} 
-        Erros: ${erros}
+        Erros: ${erros}.
         ${textosMedicos[Math.floor(Math.random() * textosMedicos.length)]}
     `;
     document.getElementById("textoFinal").innerHTML = textoFinal;
