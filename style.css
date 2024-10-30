@@ -3,7 +3,6 @@ body {
     background-color: #2d2d2d;
     color: white;
     margin: 0;
-    padding: 0;
     font-family: 'Cormorant Garamond', serif;
     line-height: 1.6;
     position: relative;
@@ -257,7 +256,7 @@ body::before {
     background-image: url(img/papel.png);
     color: #3f200e;
     padding: 20px;
-    margin-left: 20px;
+    margin-left: 100px;
     text-align: center;
     width: 300px;
     height: 500px;
