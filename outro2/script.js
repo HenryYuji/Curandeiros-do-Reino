@@ -1,23 +1,23 @@
 const doencas = [
     { 
         nome: "Ergotismo", 
-        sintomas: "Convulsões, alucinações, dor de cabeça intensa, delírios, psicoses.", 
-        imagem: "ergotismo.jpg" 
+        sintomas: "Convulsões, alucinações, dor de cabeça intensa, delírios, psicoses.",
+        tratamento: "Tratamento: Medicamentos."
     },
     { 
         nome: "Varíola", 
-        sintomas: "Febre, erupção cutânea com bolhas, dor de cabeça, vômito.", 
-        imagem: "variola.jpg" 
+        sintomas: "Febre, erupção cutânea com bolhas, dor de cabeça, vômito.",
+        tratamento: "Tratamento: Variolação." 
     },
     { 
         nome: "Peste Negra", 
         sintomas: "Febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas.", 
-        imagem: "peste_negra.jpg" 
+        tratamento: "Tratamento: Sangria."
     },
     { 
         nome: "Lepra", 
         sintomas: "Lesões cutâneas, fraqueza muscular, dormência nas extremidades.", 
-        imagem: "lepra.jpg" 
+        tratamento: "Tratamento: Isolamento."
     }
 ];
 
@@ -91,6 +91,7 @@ function atualizarPaginaLivro() {
     paginaDoenca.innerHTML = `
         <h3>${doencas[paginaAtual].nome}</h3>
         <p>${doencas[paginaAtual].sintomas}</p>
+        <h4>${doencas[paginaAtual].tratamento}</h4>
     `;
 }
 
