@@ -3,25 +3,25 @@ const doencas = [
         nome: "Ergotismo", 
         sintomas: "Convulsões, alucinações, dor de cabeça intensa, delírios, psicoses.",
         tratamento: "Tratamento: Medicamentos.",
-        imagem: "img/paciente-ergotismo.png"
+        imagem: "img/ergotismo.png"
     },
     { 
         nome: "Varíola", 
         sintomas: "Febre, erupção cutânea com bolhas, dor de cabeça, vômito.",
         tratamento: "Tratamento: Variolação.",
-        imagem: "img/paciente-variola.png"
+        imagem: "img/variola.png"
     },
     { 
         nome: "Peste Negra", 
         sintomas: "Febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas.", 
         tratamento: "Tratamento: Sangria.",
-        imagem: "img/paciente-peste.png"
+        imagem: "img/peste.png"
     },
     { 
         nome: "Lepra", 
         sintomas: "Lesões cutâneas, fraqueza muscular, dormência nas extremidades.", 
         tratamento: "Tratamento: Isolamento.",
-        imagem: "img/paciente-lepra.png"
+        imagem: "img/lepra.png"
     }
 ];
 
@@ -81,6 +81,7 @@ function iniciarRodada() {
         controleDoencas[doencaAtual.nome]++;  // Aumenta o contador para a doença atual
         doencaAnterior = doencaAtual.nome;    // Armazena a doença atual para a próxima verificação
 
+        document.getElementById("imagem").src = doencaAtual.imagem
         document.getElementById("sintomas").textContent = doencaAtual.sintomas;
 
         // Exibe a imagem correspondente à doença atual
@@ -137,11 +138,15 @@ document.getElementById("doenca4").addEventListener("click", function() { verifi
 function finalizarRodada() {
     const textoFinal = `
         Você diagnosticou ${totalPacientes} pacientes!
-        Acertos: ${acertos} 
-        Erros: ${erros}.
-        ${textosMedicos[Math.floor(Math.random() * textosMedicos.length)]}
+        Acertos: ${acertos} | 
+        Erros: ${erros}
     `;
+
+    const historiaFinal = `
+    ${textosMedicos[Math.floor(Math.random() * textosMedicos.length)]}
+    `
     document.getElementById("textoFinal").innerHTML = textoFinal;
+    document.getElementById("historiaFinal").innerHTML = historiaFinal;
     document.getElementById("gameContainer").style.display = "none";
     document.getElementById("telaFinal").style.display = "flex";
 }
