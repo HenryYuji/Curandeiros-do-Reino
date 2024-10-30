@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>O Mestre da Peste</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Mestre da Peste</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<div id="start-screen" class="screen">
-<h1>O Mestre da Peste</h1>
-<p>Você acorda em um hospital medieval. O lugar está em caos devido à peste negra. Sua missão é encontrar e curar 10 pacientes usando os remédios corretos.</p>
-<button id="start-button">Iniciar Jogo</button>
-</div>
-<canvas id="gameCanvas" width="800" height="600"></canvas>
-<div id="dialog"></div>
-<div id="end-screen" class="screen">
-<h2>Parabéns, você curou todos os pacientes!</h2>
-<p>Você salvou vidas e venceu a peste negra. Obrigado por jogar!</p>
-<button id="restart-button">Jogar Novamente</button>
-</div>
-<script src="script.js"></script>
+
+  <!-- Tela de início -->
+  <div id="start-screen" class="screen">
+    <h1>O Mestre da Peste</h1>
+    <p>Você acorda em um hospital medieval. O lugar está em caos devido à peste negra. Sua missão é encontrar e curar 10 pacientes usando os remédios corretos.</p>
+    <button id="start-button">Iniciar Jogo</button>
+  </div>
+
+  <!-- Canvas do jogo -->
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <!-- Caixa de diálogo para interações -->
+  <div id="dialog"></div>
+
+  <!-- Tela final -->
+  <div id="end-screen" class="screen">
+    <h2>Parabéns, você curou todos os pacientes!</h2>
+    <p>Você salvou vidas e venceu a peste negra. Obrigado por jogar!</p>
+    <button id="restart-button">Jogar Novamente</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
