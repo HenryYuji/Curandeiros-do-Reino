@@ -91,7 +91,7 @@ function atualizarPaginaLivro() {
     paginaDoenca.innerHTML = `
         <h3>${doencas[paginaAtual].nome}</h3>
         <p>${doencas[paginaAtual].sintomas}</p>
-        <h4>${doencas[paginaAtual].tratamento}</h4>
+        <h3>${doencas[paginaAtual].tratamento}</h3>
     `;
 }
 
