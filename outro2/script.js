@@ -2,22 +2,26 @@ const doencas = [
     { 
         nome: "Ergotismo", 
         sintomas: "Convulsões, alucinações, dor de cabeça intensa, delírios, psicoses.",
-        tratamento: "Tratamento: Medicamentos."
+        tratamento: "Tratamento: Medicamentos.",
+        imagem: "img/paciente-ergotismo.png"
     },
     { 
         nome: "Varíola", 
         sintomas: "Febre, erupção cutânea com bolhas, dor de cabeça, vômito.",
-        tratamento: "Tratamento: Variolação." 
+        tratamento: "Tratamento: Variolação.",
+        imagem: "img/paciente-variola.png"
     },
     { 
         nome: "Peste Negra", 
         sintomas: "Febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas.", 
-        tratamento: "Tratamento: Sangria."
+        tratamento: "Tratamento: Sangria.",
+        imagem: "img/paciente-peste.png"
     },
     { 
         nome: "Lepra", 
         sintomas: "Lesões cutâneas, fraqueza muscular, dormência nas extremidades.", 
-        tratamento: "Tratamento: Isolamento."
+        tratamento: "Tratamento: Isolamento.",
+        imagem: "img/paciente-lepra.png"
     }
 ];
 

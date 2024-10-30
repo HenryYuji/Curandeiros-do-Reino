@@ -89,7 +89,7 @@ body::before {
 .opcoes-doenca {
     display: flex;
     flex-direction: column;
-    margin-left: 80px;
+    margin-left: 79px;
 }
 
 .opcoes-doenca h3 {
@@ -113,29 +113,6 @@ body::before {
 .opcoes-doenca button:hover {
     background-color: #300c04;
 }
-
-.opcoes-tratamento {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.opcoes-tratamento button {
-    background-color: #4e1405;
-    color: white;
-    border: none;
-    padding: 10px 30px;
-    margin: 10px 5px;
-    cursor: pointer;
-    font-family: 'Cormorant Garamond', serif;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    font-size: 1.2em;
-}
-
-.treatment-options button:hover {
-    background-color: #300c04;
-}
-
 
 #sintomas {
     font-size: 1.2em;
@@ -255,7 +232,7 @@ body::before {
 }
 
 .navegacao button {
-    background-color: #8b4513;
+    background-color: #4e1405;
     color: white;
     border: none;
     padding: 10px;
@@ -302,7 +279,7 @@ body::before {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
-    color: #5d3a00;
+    color: #4e1405;
     width: 80%;
     max-width: 600px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -319,7 +296,7 @@ body::before {
 }
 
 .tela-final button {
-    background-color: #8b4513;
+    background-color: #4e1405;
     background-color: #555;
     color: white;
     border: none;
@@ -333,7 +310,7 @@ body::before {
 }
 
 .tela-final button:hover {
-    background-color: #5d3a00;
+    background-color: #300c04;
     transform: scale(1.05);
 }
 
