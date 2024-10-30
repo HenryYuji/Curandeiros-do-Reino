@@ -13,7 +13,7 @@ const doencas = [
     },
     { 
         nome: "Peste Negra", 
-        sintomas: "Febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas.", 
+        sintomas: "Manchas escuras, febre alta, calafrios, fadiga extrema, inchaço nas glândulas linfáticas.", 
         tratamento: "Tratamento: Sangria.",
         imagem: "img/peste.png"
     },
