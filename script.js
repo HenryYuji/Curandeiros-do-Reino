@@ -25,6 +25,14 @@ const doencas = [
     }
 ];
 
+// Objeto para controlar a imagem usada para cada doença
+const controleImagens = {
+    "Ergotismo": null,
+    "Varíola": null,
+    "Peste Negra": null,
+    "Lepra": null
+};
+
 const textosMedicos = [
     "Os dias de um médico na Idade Média eram longos e desafiadores. Diagnosticar corretamente era crucial para salvar vidas em um tempo de poucos recursos.",
     "No ambiente sombrio da Idade Média, doenças devastadoras assolavam a população, e os médicos se esforçavam para aliviar o sofrimento.",
@@ -51,7 +59,7 @@ function iniciarJogo() {
     acertos = 0;
     erros = 0;
     pacienteAtual = 0;
-    totalPacientes = Math.floor(Math.random() * (7 - 3 + 1)) + 3;
+    totalPacientes = Math.floor(Math.random() * (7 - 4 + 1)) + 4;
     document.getElementById("telaFinal").style.display = "none";
     document.getElementById("gameContainer").style.display = "flex";
 
@@ -81,11 +89,23 @@ function iniciarRodada() {
         controleDoencas[doencaAtual.nome]++;  // Aumenta o contador para a doença atual
         doencaAnterior = doencaAtual.nome;    // Armazena a doença atual para a próxima verificação
 
-        document.getElementById("imagem").src = doencaAtual.imagem
+        // Seleciona aleatoriamente uma imagem que ainda não foi usada na rodada anterior
+        let imagemAleatoria;
+
+        do {
+            imagemAleatoria = Math.random() < 0.5 
+                ? doencaAtual.imagem 
+                : doencaAtual.imagem.replace(".png", "2.png");
+        } while (imagemAleatoria === controleImagens[doencaAtual.nome]); // Garante que a imagem não se repita
+
+        // Armazena a imagem usada para a doença atual
+        controleImagens[doencaAtual.nome] = imagemAleatoria;
+
+        document.getElementById("imagem").src = imagemAleatoria;
         document.getElementById("sintomas").textContent = doencaAtual.sintomas;
 
         // Exibe a imagem correspondente à doença atual
-        document.getElementById("imagem-paciente").src = doencaAtual.imagem;
+        document.getElementById("imagem-paciente").src = imagemAleatoria;
     } else {
         finalizarRodada();
     }
